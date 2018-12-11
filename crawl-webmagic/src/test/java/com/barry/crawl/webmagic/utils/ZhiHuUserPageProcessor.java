@@ -3,7 +3,10 @@ package com.barry.crawl.webmagic.utils;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.processor.example.ZhihuPageProcessor;
+
 import java.util.Date;
 
 /**
@@ -23,7 +26,13 @@ public class ZhiHuUserPageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
+        /** 1. 如果是用户列表页面 【入口页面】，将所有用户的详细页面的url放入target集合中 */
+        if (page.getUrl().regex("https://www\\.zhihu\\.com/search\\?type=people&q=[\\s\\S]+").match()){
 
+        } else {
+            /** 2. 如果是用户详细页面 */
+
+        }
     }
 
     @Override
@@ -35,10 +44,13 @@ public class ZhiHuUserPageProcessor implements PageProcessor {
     public static void main(String[] args) {
         Long startTime, endTime;
         startTime = new Date().getTime();
-
+        Spider.create(new ZhihuPageProcessor()).
+                addUrl("https://www.zhihu.com/search?type=people&q="+keyword).
+                thread(5).
+                run();
 
         endTime = new Date().getTime();
-        log.info("=====================>一共爬到"+num+"个用户信息");
+        log.info("=====================>一共爬到:"+num+"个用户信息,用时:"+(endTime-startTime)/1000+"秒");
     }
 
 }
