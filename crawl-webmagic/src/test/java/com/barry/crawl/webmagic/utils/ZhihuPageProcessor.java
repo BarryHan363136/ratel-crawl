@@ -24,7 +24,7 @@ public class ZhihuPageProcessor implements PageProcessor {
     private Site site = Site.me().
             setRetryTimes(3).setSleepTime(1000).
             setTimeOut(50000).setCharset("UTF-8").
-            setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36");
+            setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
 
     @Override
     public Site getSite() {
@@ -35,7 +35,7 @@ public class ZhihuPageProcessor implements PageProcessor {
     public void process(Page page) {
         integer.incrementAndGet();
         String name = page.getHtml().xpath("//div[@class='null-toggle']/span[@class='Highlight']/text()").get();
-        String name2 = page.getHtml().xpath("//div[@class='Popover']/div[@class='null-toggle']/a[@class='UserLink-link']/span[@class='Highlight']/text()").get();
+        String name2 = page.getHtml().xpath("//div[@class='null-toggle']/a/span[@class='Highlight']/@title").get();
         log.info("=============================>name:"+name+",name2:"+name2);
     }
 
