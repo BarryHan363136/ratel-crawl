@@ -43,7 +43,7 @@ public class ZhihuPageProcessor implements PageProcessor {
         } else {
             //String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
             String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
-
+            String headline = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='RichText ztext ProfileHeader-headline']/text()").get();
 
 
 

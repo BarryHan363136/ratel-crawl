@@ -10,18 +10,14 @@ public class ZhihuUser implements Serializable {
     private String nick;
     /** 标题 */
     private String headline;
-    /** 身份 */
-    private String identity;
     /** 所在地 */
     private String location;
     /** 行业 */
     private String profession;
-    /** 性别 */
-    private int sex;
-    /** 学校 */
-    private String school;
-    /** 专业 */
-    private String major;
+    /** 职业经历 */
+    private String careerExperience;
+    /** 教育经历 */
+    private String educationalExperience;
     /** 个人简介 */
     private String recommend;
     /** 头像url */
