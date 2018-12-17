@@ -18,8 +18,12 @@ public class ZhihuUser implements Serializable {
     private String careerExperience;
     /** 教育经历 */
     private String educationalExperience;
+    /** 性别 */
+    private String gender;
     /** 个人简介 */
     private String recommend;
+    /** 个人知乎url */
+    private String homepageUrl;
     /** 头像url */
     private String picUrl;
     /** 赞同 */

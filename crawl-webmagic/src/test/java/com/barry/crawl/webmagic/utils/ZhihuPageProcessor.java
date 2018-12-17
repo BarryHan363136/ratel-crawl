@@ -1,5 +1,6 @@
 package com.barry.crawl.webmagic.utils;
 
+import com.bmw.cn.webmagic.model.ZhihuUser;
 import com.bmw.cn.webmagic.utils.JSONMapper;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;
@@ -20,7 +21,7 @@ public class ZhihuPageProcessor implements PageProcessor {
 
     private static final String keyword = "netty学习";
 
-    private static List list = new ArrayList<>();
+    private static List<ZhihuUser> list = new ArrayList();
 
     private Site site = Site.me().
             setRetryTimes(3).setSleepTime(1000).
@@ -44,14 +45,24 @@ public class ZhihuPageProcessor implements PageProcessor {
             //String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
             String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
             String headline = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='RichText ztext ProfileHeader-headline']/text()").get();
+            String homepageUrl = page.getHtml().xpath("").get();
 
 
 
 
 
 
+
+
+
+
+
+
+            ZhihuUser user = new ZhihuUser();
+            user.setNick(nick);
+            user.setHeadline(headline);
             log.info("=============================>nick:"+nick);
-            list.add(nick);
+            list.add(user);
         }
     }
 
