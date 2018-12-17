@@ -6,10 +6,8 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 爬取知乎用户信息
@@ -43,10 +41,17 @@ public class ZhihuPageProcessor implements PageProcessor {
         if(page.getUrl().regex("https://www\\.zhihu\\.com/search\\?type=people&q=[\\s\\S]+").match()){
             page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='List-item']/div[@class='ContentItem']/div[@class='ContentItem-main']/div[@class='ContentItem-image']").links().all());
         } else {
-            String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
-            String name2 = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
-            log.info("=============================>name:"+name+",name2:"+name2);
-            list.add(name);
+            //String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
+            String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
+
+
+
+
+
+
+
+            log.info("=============================>nick:"+nick);
+            list.add(nick);
         }
     }
 
