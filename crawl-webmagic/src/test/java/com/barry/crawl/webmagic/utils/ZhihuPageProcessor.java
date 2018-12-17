@@ -41,7 +41,6 @@ public class ZhihuPageProcessor implements PageProcessor {
     public void process(Page page) {
         log.info("================>page.getUrl:"+page.getUrl());
         if(page.getUrl().regex("https://www\\.zhihu\\.com/search\\?type=people&q=[\\s\\S]+").match()){
-            //page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='List-item']").links().all());
             page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='List-item']/div[@class='ContentItem']/div[@class='ContentItem-main']/div[@class='ContentItem-image']").links().all());
         } else {
             String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
