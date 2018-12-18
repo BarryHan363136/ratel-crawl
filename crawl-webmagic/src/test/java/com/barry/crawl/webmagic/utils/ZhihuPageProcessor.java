@@ -70,7 +70,10 @@ public class ZhihuPageProcessor implements PageProcessor {
             user.setAgree(StringUtils.isNotBlank(agree) ? Integer.parseInt(agree) : 0);
             user.setThanks(StringUtils.isNotBlank(thanks) ? Integer.parseInt(thanks) : 0);
             user.setFollowerCount(StringUtils.isNotBlank(followerCount) ? Integer.parseInt(followerCount) : 0);
-
+            //user.setAsk();
+            user.setAnswer(StringUtils.isNotEmpty(answer) ? Integer.parseInt(answer) : 0);
+            user.setArticle(StringUtils.isNotEmpty(article) ? Integer.parseInt(article) : 0);
+            //user.setCollection();
             list.add(user);
         }
     }
