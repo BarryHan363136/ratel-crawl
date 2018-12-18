@@ -3,6 +3,7 @@ package com.barry.crawl.webmagic.utils;
 import com.bmw.cn.webmagic.model.ZhihuUser;
 import com.bmw.cn.webmagic.utils.JSONMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -60,11 +61,17 @@ public class ZhihuPageProcessor implements PageProcessor {
 
 
             log.info("=============================>nick:"+nick+",headline:"+headline+",homepageUrl:"+homepageUrl+",gender:"+gender+",picUrl:"+picUrl+",agree:"+agree+",thanks:"+thanks+",followerCount:"+followerCount+",answer:"+answer+",article:"+article);
-//            ZhihuUser user = new ZhihuUser();
-//            user.setNick(nick);
-//            user.setHeadline(headline);
-//            user.setHomepageUrl(homepageUrl);
-//            list.add(user);
+            ZhihuUser user = new ZhihuUser();
+            user.setNick(nick);
+            user.setHeadline(headline);
+            user.setHomepageUrl(homepageUrl);
+            user.setGender(gender);
+            user.setPicUrl(picUrl);
+            user.setAgree(StringUtils.isNotBlank(agree) ? Integer.parseInt(agree) : 0);
+            user.setThanks(StringUtils.isNotBlank(thanks) ? Integer.parseInt(thanks) : 0);
+            user.setFollowerCount(StringUtils.isNotBlank(followerCount) ? Integer.parseInt(followerCount) : 0);
+
+            list.add(user);
         }
     }
 
