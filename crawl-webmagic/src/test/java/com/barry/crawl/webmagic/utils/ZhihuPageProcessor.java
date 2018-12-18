@@ -54,10 +54,14 @@ public class ZhihuPageProcessor implements PageProcessor {
             String agree = page.getHtml().xpath("//meta[@itemprop='zhihu:voteupCount']/@content").get();
             String thanks = page.getHtml().xpath("//meta[@itemprop='zhihu:thankedCount']/@content").get();
             String followerCount = page.getHtml().xpath("//meta[@itemprop='zhihu:followerCount']/@content").get();
-            String ask = "";
             String answer = page.getHtml().xpath("//meta[@itemprop='zhihu:answerCount']/@content").get();
             String article = page.getHtml().xpath("//meta[@itemprop='zhihu:articlesCount']/@content").get();
+            String ask = "";
             String collection = "";
+            String location = "";
+            String profession = "";
+            String careerExperience = "";
+            String educationalExperience = "";
 
 
             log.info("=============================>nick:"+nick+",headline:"+headline+",homepageUrl:"+homepageUrl+",gender:"+gender+",picUrl:"+picUrl+",agree:"+agree+",thanks:"+thanks+",followerCount:"+followerCount+",answer:"+answer+",article:"+article);
@@ -70,9 +74,9 @@ public class ZhihuPageProcessor implements PageProcessor {
             user.setAgree(StringUtils.isNotBlank(agree) ? Integer.parseInt(agree) : 0);
             user.setThanks(StringUtils.isNotBlank(thanks) ? Integer.parseInt(thanks) : 0);
             user.setFollowerCount(StringUtils.isNotBlank(followerCount) ? Integer.parseInt(followerCount) : 0);
-            //user.setAsk();
             user.setAnswer(StringUtils.isNotEmpty(answer) ? Integer.parseInt(answer) : 0);
             user.setArticle(StringUtils.isNotEmpty(article) ? Integer.parseInt(article) : 0);
+            //user.setAsk();
             //user.setCollection();
             list.add(user);
         }
