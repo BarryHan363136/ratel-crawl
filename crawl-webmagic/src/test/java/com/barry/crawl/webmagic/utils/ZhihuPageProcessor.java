@@ -21,7 +21,7 @@ public class ZhihuPageProcessor implements PageProcessor {
 
     private static final String keyword = "netty学习";
 
-    private static List<ZhihuUser> list = new ArrayList();
+    private static List list = new ArrayList();
 
     private Site site = Site.me().
             setRetryTimes(3).setSleepTime(1000).
@@ -40,29 +40,17 @@ public class ZhihuPageProcessor implements PageProcessor {
     public void process(Page page) {
         log.info("================>page.getUrl:"+page.getUrl());
         if(page.getUrl().regex("https://www\\.zhihu\\.com/search\\?type=people&q=[\\s\\S]+").match()){
-            page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='List-item']/div[@class='ContentItem']/div[@class='ContentItem-main']/div[@class='ContentItem-image']").links().all());
+            page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='Card SearchResult-Card']/div[@class='List-item']/div[@class='ContentItem']/div[@class='ContentItem-main']/div[@class='ContentItem-head']/h2/div/span[@class='UserLink SearchItem-userTitle']").links().all());
         } else {
-            //String name = page.getHtml().xpath("//span[@class='ProfileHeader-name']/text()").get();
             String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
             String headline = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='RichText ztext ProfileHeader-headline']/text()").get();
             String homepageUrl = page.getHtml().xpath("").get();
 
-
-
-
-
-
-
-
-
-
-
-
-            ZhihuUser user = new ZhihuUser();
-            user.setNick(nick);
-            user.setHeadline(headline);
             log.info("=============================>nick:"+nick);
-            list.add(user);
+//            ZhihuUser user = new ZhihuUser();
+//            user.setNick(nick);
+//            user.setHeadline(headline);
+            list.add(nick);
         }
     }
 
