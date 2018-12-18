@@ -27,17 +27,19 @@ public class ZhihuUser implements Serializable {
     /** 头像url */
     private String picUrl;
     /** 赞同 */
-    private int agree;
+    private Integer agree;
     /** 感谢 */
-    private int thanks;
+    private Integer thanks;
+    /** 跟帖数 */
+    private Integer followerCount;
     /** 提问数 */
-    private int ask;
+    private Integer ask;
     /** 回答数 */
-    private int answer;
+    private Integer answer;
     /** 文章数 */
-    private int article;
+    private Integer article;
     /** 收藏数 */
-    private int collection;
+    private Integer collection;
 
 
 }

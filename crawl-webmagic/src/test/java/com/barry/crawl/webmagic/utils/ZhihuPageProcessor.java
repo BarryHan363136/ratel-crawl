@@ -44,13 +44,27 @@ public class ZhihuPageProcessor implements PageProcessor {
         } else {
             String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
             String headline = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='RichText ztext ProfileHeader-headline']/text()").get();
-            String homepageUrl = page.getHtml().xpath("").get();
+            /**
+             * tree.xpath('//meta[@itemprop="keywords"]/@content')
+             * */
+            String homepageUrl = page.getHtml().xpath("//meta[@itemprop='url']/@content").get();
+            String gender = page.getHtml().xpath("//meta[@itemprop='gender']/@content").get();
+            String picUrl = page.getHtml().xpath("//meta[@itemprop='image']/@content").get();
+            String agree = page.getHtml().xpath("//meta[@itemprop='zhihu:voteupCount']/@content").get();
+            String thanks = page.getHtml().xpath("//meta[@itemprop='zhihu:thankedCount']/@content").get();
+            String followerCount = page.getHtml().xpath("//meta[@itemprop='zhihu:followerCount']/@content").get();
+            String ask = "";
+            String answer = page.getHtml().xpath("//meta[@itemprop='zhihu:answerCount']/@content").get();
+            String article = page.getHtml().xpath("//meta[@itemprop='zhihu:articlesCount']/@content").get();
+            String collection = "";
 
-            log.info("=============================>nick:"+nick);
+
+            log.info("=============================>nick:"+nick+",headline:"+headline+",homepageUrl:"+homepageUrl+",gender:"+gender+",picUrl:"+picUrl+",agree:"+agree+",thanks:"+thanks+",followerCount:"+followerCount+",answer:"+answer+",article:"+article);
 //            ZhihuUser user = new ZhihuUser();
 //            user.setNick(nick);
 //            user.setHeadline(headline);
-            list.add(nick);
+//            user.setHomepageUrl(homepageUrl);
+//            list.add(user);
         }
     }
 
