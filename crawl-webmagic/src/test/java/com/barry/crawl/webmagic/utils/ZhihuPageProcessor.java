@@ -23,6 +23,7 @@ public class ZhihuPageProcessor implements PageProcessor {
     private static final String keyword = "netty学习";
 
     private static List list = new ArrayList();
+    private static List list2 = new ArrayList();
 
     private Site site = Site.me().
             setRetryTimes(3).setSleepTime(1000).
@@ -44,6 +45,9 @@ public class ZhihuPageProcessor implements PageProcessor {
             page.addTargetRequests(page.getHtml().xpath("//div[@class='List']/div/div[@class='Card SearchResult-Card']/div[@class='List-item']/div[@class='ContentItem']/div[@class='ContentItem-main']/div[@class='ContentItem-head']/h2/div/span[@class='UserLink SearchItem-userTitle']").links().all());
         } else {
             String nick = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='ProfileHeader-name']/text()").get();
+
+
+            list2.add(page.getHtml().xpath("//*[@id=\"ProfileHeader\"]/div/div[2]/div/div[2]/div[1]/h1/span[2]/text()").get());
             String headline = page.getHtml().xpath("//div[@class='ProfileHeader-content']/div[@class='ProfileHeader-contentHead']/h1[@class='ProfileHeader-title']/span[@class='RichText ztext ProfileHeader-headline']/text()").get();
             /**
              * tree.xpath('//meta[@itemprop="keywords"]/@content')
@@ -58,11 +62,10 @@ public class ZhihuPageProcessor implements PageProcessor {
             String article = page.getHtml().xpath("//meta[@itemprop='zhihu:articlesCount']/@content").get();
             String ask = "";
             String collection = "";
-            String location = "";
-            String profession = "";
-            String careerExperience = "";
-            String educationalExperience = "";
-
+            String location = page.getHtml().xpath("//*[@id=\"ProfileHeader\"]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/span[1]/text()").get();
+            String profession = page.getHtml().xpath("//div[@class='ProfileHeader-detailItem']/div[@class='ProfileHeader-detailValue']/text()").get();
+            //String careerExperience = page.getHtml().xpath("//div[@class='ProfileHeader-divider']/@content").get();
+            String educationalExperience =  page.getHtml().xpath("//*[@id=\"ProfileHeader\"]/div/div[2]/div/div[2]/div[2]/div/div/div[4]/div/div[1]/text()").get();
 
             log.info("=============================>nick:"+nick+",headline:"+headline+",homepageUrl:"+homepageUrl+",gender:"+gender+",picUrl:"+picUrl+",agree:"+agree+",thanks:"+thanks+",followerCount:"+followerCount+",answer:"+answer+",article:"+article);
             ZhihuUser user = new ZhihuUser();
@@ -76,6 +79,9 @@ public class ZhihuPageProcessor implements PageProcessor {
             user.setFollowerCount(StringUtils.isNotBlank(followerCount) ? Integer.parseInt(followerCount) : 0);
             user.setAnswer(StringUtils.isNotEmpty(answer) ? Integer.parseInt(answer) : 0);
             user.setArticle(StringUtils.isNotEmpty(article) ? Integer.parseInt(article) : 0);
+            user.setLocation(location);
+            user.setEducationalExperience(educationalExperience);
+            user.setProfession(profession);
             //user.setAsk();
             //user.setCollection();
             list.add(user);
